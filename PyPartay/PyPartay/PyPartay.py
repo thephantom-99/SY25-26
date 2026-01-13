@@ -50,6 +50,56 @@ def main():
                 print(f"{late_band[0]} moved to the end.")
             else:
                 print("Not enough bands to swap!")
- 
+
+        # 4. Remove band by name
+        elif choice == "4":
+            name_to_remove = input("Enter the name of the band to remove: ")
+            found = False
+            for artist in lineup:
+                if artist[0].lower() == name_to_remove.lower():
+                    lineup.remove(artist)
+                    print(f"{artist[0]} removed.")
+                    found = True
+                    break
+            if not found:
+                print(f"Band '{name_to_remove}' not found.")
+
+        # 5. Move band to specific position
+        elif choice == "5":
+            name_to_move = input("Enter the name of the band to move: ")
+            target_artist = None
+            current_index = -1
+
+            for i, artist in enumerate(lineup):
+                if artist[0].lower() == name_to_move.lower():
+                    target_artist = artist
+                    current_index = i
+                    break
+
+            if not target_artist:
+                print(f"Band '{name_to_move}' not found.")
+                continue
+
+            try:
+                new_pos = int(input(f"Enter new position (1-{len(lineup)}): "))
+                if 1 <= new_pos <= len(lineup):
+                    lineup.pop(current_index)
+                    lineup.insert(new_pos - 1, target_artist)
+                    print(f"{target_artist[0]} moved to position {new_pos}.")
+                else:
+                    print("Position out of range.")
+            except ValueError:
+                print("Please enter a valid number.")
+
+        # 6. Exit
+        elif choice == "6":
+            print("Exiting Stage Manager. Have a great show!")
+            break
+
+        else:
+            print("Invalid choice.")
+
+if __name__ == "__main__":
     main()
+
 
