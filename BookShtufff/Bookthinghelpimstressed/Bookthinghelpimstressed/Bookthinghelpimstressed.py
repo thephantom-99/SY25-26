@@ -55,3 +55,5 @@ def scrape_with_permission(target_url):
 if __name__ == "__main__":
     # You can change this to any URL you want to test
     scrape_with_permission("https://example.com")
+
+    gufelkugegfeauogr;ogue2liegf;ugwefkulgdoEAUFLKGUASFGLUFKULG
