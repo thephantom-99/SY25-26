@@ -3,7 +3,6 @@ from bs4 import BeautifulSoup
 
 base_url = 'http://books.toscrape.com/catalogue/page-{}.html'
 
-<<<<<<< Updated upstream
 rating_map = {
     "One": 1,
     "Two": 2,
@@ -15,28 +14,21 @@ rating_map = {
 search_title = input("Enter a book title: ").lower()
 found = False
 
-for page in range(1, 51):  
+for page in range(1, 51):
     url = base_url.format(page)
     response = requests.get(url)
 
     if response.status_code != 200:
-        print(f"Error on page {page}")
         continue
 
     soup = BeautifulSoup(response.text, 'html.parser')
     books = soup.find_all('article', class_='product_pod')
-=======
-if response.status_code == 200:
-    soup = BeautifulSoup(response.text, 'html.parser') 
-
-    books = soup.find_all('article', class_='product_pod') 
->>>>>>> Stashed changes
 
     for book in books:
         title = book.h3.a['title']
         rating_class = book.find('p', class_='star-rating')['class']
         rating_word = rating_class[1]
-        rating = rating_map[rating_word]
+        rating = rating_map.get(rating_word, 0)
 
         if search_title in title.lower():
             print(f"\n✅ Found on page {page}")
