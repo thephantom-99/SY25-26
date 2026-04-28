@@ -3,6 +3,7 @@ from bs4 import BeautifulSoup
 
 base_url = 'http://books.toscrape.com/catalogue/page-{}.html'
 
+<<<<<<< Updated upstream
 # Convert word ratings to numbers
 rating_map = {
     "One": 1,
@@ -25,6 +26,12 @@ for page in range(1, 51):  # site has 50 pages
 
     soup = BeautifulSoup(response.text, 'html.parser')
     books = soup.find_all('article', class_='product_pod')
+=======
+if response.status_code == 200:
+    soup = BeautifulSoup(response.text, 'html.parser')  # Fixed: use .text, not .txt
+
+    books = soup.find_all('article', class_='product_pod')  # Fixed: class_='product_pod'
+>>>>>>> Stashed changes
 
     for book in books:
         title = book.h3.a['title']
